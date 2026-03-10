@@ -29,7 +29,7 @@ return(
 
 <Typography variant="h5">Register Student</Typography>
 
-<TextField fullWidth label="Name" name="name" onChange={handleChange} sx={{mt:2}}/>
+<TextField fullWidth label="Student Name" name="name" onChange={handleChange} sx={{mt:2}}/>
 
 <TextField  fullWidth  label="Email"  name="email"  placeholder="Enter your email"  onChange={handleChange}  sx={{ mt: 2 }}
 />
