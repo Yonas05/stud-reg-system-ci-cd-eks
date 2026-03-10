@@ -5,33 +5,69 @@ on:
     branches: ["main"]
 
 jobs:
-  build-and-push:
+
+  # ---------------- BUILD JOB ----------------
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Login to Docker Hub
+      - name: Build Backend Image
+        run: docker build -t student-backend ./backend
+
+      - name: Build Frontend Image
+        run: docker build -t student-frontend ./frontend
+
+
+  # ---------------- TEST JOB ----------------
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Run Backend Tests
+        run: |
+          echo "Running backend tests"
+          cd backend
+          npm install
+          npm test
+
+      - name: Run Frontend Tests
+        run: |
+          echo "Running frontend tests"
+          cd frontend
+          npm install
+          npm test
+
+
+  # ---------------- DEPLOY JOB ----------------
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 3: Build backend image
       - name: Build Backend Image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/student-backend ./backend
 
-      # Step 4: Build frontend image
       - name: Build Frontend Image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/student-frontend ./frontend
 
-      # Step 5: Push backend image
       - name: Push Backend Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/student-backend
 
-      # Step 6: Push frontend image
       - name: Push Frontend Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/student-frontend 
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/student-frontend
