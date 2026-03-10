@@ -31,8 +31,8 @@ return(
 
 <TextField fullWidth label="Name" name="name" onChange={handleChange} sx={{mt:2}}/>
 
-<TextField fullWidth label="Email" name="email" onChange={handleChange} sx={{mt:2}}/>
-
+<TextField  fullWidth  label="Email"  name="email"  placeholder="Enter your email"  onChange={handleChange}  sx={{ mt: 2 }}
+/>
 <TextField fullWidth label="Course" name="course" onChange={handleChange} sx={{mt:2}}/>
 
 <TextField fullWidth label="Age" name="age" onChange={handleChange} sx={{mt:2}}/>
