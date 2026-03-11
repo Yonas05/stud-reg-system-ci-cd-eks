@@ -6,7 +6,7 @@ function StudentsList() {
 
   const loadStudents = async () => {
     try {
-      const res = await axios.get("api/students");
+      const res = await axios.get("/api/students");
       setStudents(res.data);
     } catch (error) {
       console.error("Error loading students:", error);
@@ -15,7 +15,7 @@ function StudentsList() {
 
   const deleteStudent = async (id) => {
     try {
-      await axios.delete(`api/students/${id}`);
+      await axios.delete(`/api/students/${id}`);
       loadStudents();
     } catch (error) {
       console.error("Error deleting student:", error);

@@ -17,7 +17,7 @@ setForm({...form,[e.target.name]:e.target.value})
 
 const submit = async ()=>{
 
-await axios.post("http://localhost:5000/students",form)
+await axios.post("/api/students",form)
 
 alert("Student Registered")
 
