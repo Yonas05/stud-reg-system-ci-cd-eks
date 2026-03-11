@@ -17,8 +17,6 @@ services:
     build:
       context: ./backend
     container_name: student_backend
-    ports:
-      - "5000:5000"
     depends_on:
       - postgres
     environment:
@@ -32,8 +30,6 @@ services:
     build:
       context: ./frontend
     container_name: student_frontend
-    ports:
-      - "3000:3000"
     environment:
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
