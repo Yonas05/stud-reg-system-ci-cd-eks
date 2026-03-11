@@ -8,7 +8,7 @@ const [students,setStudents] = useState([])
 
 useEffect(()=>{
 
-axios.get("http://localhost:5000/students")
+axios.get("api/students")
 .then(res=>setStudents(res.data))
 
 },[])

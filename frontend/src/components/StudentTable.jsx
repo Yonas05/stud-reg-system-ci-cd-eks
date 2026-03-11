@@ -12,14 +12,14 @@ const [search,setSearch] = useState("")
 
 useEffect(()=>{
 
-axios.get("http://localhost:5000/students")
+axios.get("api/students")
 .then(res=>setStudents(res.data))
 
 },[])
 
 const deleteStudent = async (id)=>{
 
-await axios.delete(`http://localhost:5000/students/${id}`)
+await axios.delete(`api/students/${id}`)
 
 setStudents(students.filter(s=>s.id!==id))
 
