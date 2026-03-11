@@ -50,7 +50,7 @@ services:
     depends_on:
       - postgres
   nginx:
-    image: nginx:latest
+    image: student-nginx
     container_name: student_nginx
     ports:
     - "80:80"

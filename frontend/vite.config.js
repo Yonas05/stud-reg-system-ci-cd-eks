@@ -8,6 +8,9 @@ export default defineConfig({
     port: 3000,
     watch: {
       usePolling: true // required on Windows for Docker file changes
-    }
+    },
+    allowedHosts: [
+      'frontend', // Allow requests from the backend container
+    ]
   }
 })
