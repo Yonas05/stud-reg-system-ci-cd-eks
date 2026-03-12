@@ -25,7 +25,7 @@ age INT
 )
 `)
 
-app.post("/students", async (req,res)=>{
+app.post("/api/students", async (req,res)=>{
   const {name,email,course,age} = req.body
 
   const result = await pool.query(
@@ -36,7 +36,7 @@ app.post("/students", async (req,res)=>{
   res.json(result.rows[0])
 })
 
-app.get("/students", async (req,res)=>{
+app.get("/api/students", async (req,res)=>{
   const result = await pool.query("SELECT * FROM students")
   res.json(result.rows)
 })
@@ -53,7 +53,7 @@ app.put("/students/:id", async (req,res)=>{
   res.json({message:"updated"})
 })
 
-app.delete("/students/:id", async (req,res)=>{
+app.delete("/api/students/:id", async (req,res)=>{
   const {id} = req.params
   await pool.query("DELETE FROM students WHERE id=$1",[id])
   res.json({message:"deleted"})

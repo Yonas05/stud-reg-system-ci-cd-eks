@@ -1,44 +1,41 @@
-import { useEffect,useState } from "react"
-import axios from "axios"
-import { Grid,Card,CardContent,Typography } from "@mui/material"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Grid, Card, CardContent, Typography } from "@mui/material";
 
-function Dashboard(){
+function Dashboard() {
+  const [students, setStudents] = useState([]);
 
-const [students,setStudents] = useState([])
+  useEffect(() => {
+    axios
+      .get("/api/students")
+      .then((res) => {
+        setStudents(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching students:", err);
+      });
+  }, []);
 
-useEffect(()=>{
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs={4}>
+        <Card>
+          <CardContent>
+            <Typography variant="h6">
+              Total Students
+            </Typography>
 
-axios.get("/api/students")
-.then(res=>setStudents(res.data))
-
-},[])
-
-return(
-
-<Grid container spacing={3}>
-
-<Grid item xs={4}>
-
-<Card>
-
-<CardContent>
-
-<Typography variant="h6">Total Students</Typography>
-
-<Typography width="500px" height="100px" variant="h3">
-{students.length}
-</Typography>
-
-</CardContent>
-
-</Card>
-
-</Grid>
-
-</Grid>
-
-)
-
+            <Typography
+              variant="h3"
+              sx={{ width: "500px", height: "100px" }}
+            >
+              {students.length}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 }
 
-export default Dashboard
+export default Dashboard;
