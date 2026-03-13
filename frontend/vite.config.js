@@ -12,5 +12,9 @@ export default defineConfig({
     allowedHosts: [
       'frontend', // Allow requests from the backend container
     ]
-  }
+  },
+  base: './',  // important for correct relative paths in production
+  plugins: [react()],
 })
+
+// vite.config.js
